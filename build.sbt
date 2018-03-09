@@ -1,4 +1,4 @@
-name := """play-scala-seed"""
+name := """play-react-chatroom"""
 organization := "com.alexmartin"
 
 version := "1.0-SNAPSHOT"
