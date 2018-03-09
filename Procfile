@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/play-rest-service -Dhttp.port=${PORT}
+web: target/universal/stage/bin/play-react-chatroom -Dhttp.port=${PORT}
