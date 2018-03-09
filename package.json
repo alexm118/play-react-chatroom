@@ -1,0 +1,7 @@
+{
+  "name": "play-react-chatroom",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "cd ui && npm install && npm run build && cd .."
+  }
+}
