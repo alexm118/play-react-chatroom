@@ -3,7 +3,32 @@
 # ~~~~
 
 # Serve index page from public directory
+### NoDocs ###
 GET     /                           controllers.FrontendController.index()
 
+###
+#  summary: Creates a new user
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.User'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.User'
+###
+POST    /user/create                controllers.UserController.createUser
+
+### NoDocs ###
+GET     /swagger                    controllers.Default.redirect(to = "/docs/swagger-ui/index.html?url=/assets/swagger.json")
+
+### NoDocs ###
+GET   /docs/swagger-ui/*file        controllers.Assets.at(path:String="/public/lib/swagger-ui", file:String)
+
+### NoDocs ###
+GET   /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
+
 # Serve static assets under public directory
+### NoDocs ###
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)

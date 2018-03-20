@@ -1,0 +1,9 @@
+swagger: "2.0"
+info:
+  title: "Play React Chatroom"
+  description: "Practice Makes Perfect"
+  version: "1.0.0"
+consumes:
+  - application/json
+produces:
+  - application/json
