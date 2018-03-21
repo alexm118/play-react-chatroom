@@ -3,7 +3,7 @@ package controllers
 import javax.inject.{Inject, Singleton}
 
 import dao.UserDAO
-import models.User
+import models.{LoginRequest, User}
 import play.api.Logger
 import play.api.libs.json.{JsError, JsSuccess, Json}
 import play.api.mvc.{AbstractController, ControllerComponents}
@@ -30,4 +30,15 @@ class UserController @Inject()(cc: ControllerComponents,
     }
   }
 
+  def login = Action.async(parse.json) { implicit request =>
+    request.body.validate[LoginRequest] match {
+      case JsSuccess(login, _) => {
+        userDao.login(login) collect  {
+          case true => Ok(Json.toJson("User Authenticated"))
+          case _ => Unauthorized(Json.toJson("Unauthorized Access"))
+        }
+      }
+      case JsError(e) => Future.successful(BadRequest(JsError.toJson(e)))
+    }
+  }
 }

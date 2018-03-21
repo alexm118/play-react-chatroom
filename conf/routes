@@ -20,6 +20,20 @@ GET     /                           controllers.FrontendController.index()
 ###
 POST    /user/create                controllers.UserController.createUser
 
+###
+#  summary: Creates a new user
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.LoginRequest'
+#  responses:
+#    200:
+#      description: success
+#    401:
+#      description: unauthorized request
+###
+POST    /user/login                controllers.UserController.login
+
 ### NoDocs ###
 GET     /swagger                    controllers.Default.redirect(to = "/docs/swagger-ui/index.html?url=/assets/swagger.json")
 

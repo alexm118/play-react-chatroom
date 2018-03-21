@@ -2,7 +2,7 @@ package dao
 
 import javax.inject.Inject
 
-import models.User
+import models.{LoginRequest, User}
 import play.api.db.slick.{DatabaseConfigProvider, HasDatabaseConfigProvider}
 import slick.jdbc.JdbcProfile
 
@@ -16,7 +16,9 @@ class UserDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
   private val Users = TableQuery[UserTable]
 
   def createUser(user: User): Future[Either[String, User]] = {
-    val userCheck: Future[Seq[User]] = db.run(Users.filter(item => item.username === user.username || item.email === user.email).result)
+    val userCheck: Future[Seq[User]] = db.run(Users.filter(item => {
+      item.username === user.username || item.email === user.email
+    }).result)
     userCheck collect {
       case Seq() => {
         db.run(Users += user)
@@ -28,7 +30,12 @@ class UserDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
     }
   }
 
-  import profile.api._
+  def login(loginRequest: LoginRequest): Future[Boolean] = {
+    val loginSuccess: Future[Seq[User]] = db.run(Users.filter(user => {
+      user.username === loginRequest.username && user.password === loginRequest.password
+    }).result)
+    loginSuccess.map(result => result.nonEmpty)
+  }
 
   private class UserTable(tag: Tag) extends Table[User](tag, "USERS"){
     def username = column[String]("username")
