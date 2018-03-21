@@ -20,6 +20,6 @@ Currently being built out below is the todo list:
 1. ~~Create endpoint to create users~~
 2. ~~Incorporate UI into repository~~
 3. ~~Create endpoint to authenticate users~~
-4. Add Login / Signup functionality to UI
+4. ~~Add Login / Signup functionality to UI~~
 5. Create Websocket endpoint to distribute messages
 6. Enable UI to communicate through websocket
