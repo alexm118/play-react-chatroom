@@ -16,24 +16,19 @@ export default class Login extends PureComponent {
             username: null,
             password: null
         }
-
-        this.updateUsername = this.updateUsername.bind(this)
-        this.updatePassword = this.updatePassword.bind(this)
-        this.login = this.login.bind(this)
-        this.createPayload = this.createPayload.bind(this)
     }
 
-    updateUsername(e){
+    updateUsername = (e) => {
         e.preventDefault()
         this.setState({username: e.target.value})
     }
 
-    updatePassword(e){
+    updatePassword = (e) => {
         e.preventDefault()
         this.setState({password: e.target.value})
     }
 
-    renderTextField(label, type, onChange){
+    renderTextField = (label, type, onChange) => {
         return (
             <div style={{width: '100%'}}>
                 <TextField
@@ -46,7 +41,7 @@ export default class Login extends PureComponent {
         )
     }
 
-    createActions(){
+    createActions = () => {
         return [
             <FlatButton label="Login"
                         primary={true} 
@@ -61,14 +56,14 @@ export default class Login extends PureComponent {
         ]
     }
 
-    createPayload(){
+    createPayload = () => {
         return {
             username: this.state.username,
             password: this.state.password
         }
     }
 
-    login(data){
+    login = (data) => {
         fetch('/user/login', {
             body: JSON.stringify(data),
             method: 'POST',

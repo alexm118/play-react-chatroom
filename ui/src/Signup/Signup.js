@@ -31,40 +31,34 @@ export default class Signup extends PureComponent {
             firstName: null,
             lastName: null
         }
-
-        this.updateUsername = this.updateUsername.bind(this)
-        this.updateEmail = this.updateEmail.bind(this)
-        this.updatePassword = this.updatePassword.bind(this)
-        this.updateFirstName = this.updateFirstName.bind(this)
-        this.updateLastName = this.updateLastName.bind(this)
     }
 
-    updateUsername(e){
+    updateUsername = (e) => {
         e.preventDefault()
         this.setState({username: e.target.value})
     }
 
-    updatePassword(e){
+    updatePassword = (e) => {
         e.preventDefault()
         this.setState({password: e.target.value})
     }
 
-    updateEmail(e){
+    updateEmail = (e) => {
         e.preventDefault()
         this.setState({email: e.target.value})
     }
 
-    updateFirstName(e){
+    updateFirstName = (e) => {
         e.preventDefault()
         this.setState({firstName: e.target.value})
     }
 
-    updateLastName(e){
+    updateLastName = (e) => {
         e.preventDefault()
         this.setState({lastName: e.target.value})
     }
 
-    createActions(){
+    createActions = () => {
         return [
             <FlatButton 
                 label="Create Account"
@@ -83,7 +77,7 @@ export default class Signup extends PureComponent {
         ]
     }
 
-    renderTextField(label, style, type, onChange){
+    renderTextField = (label, style, type, onChange) => {
         return <TextField
                     floatingLabelText={label}
                     style={style}
@@ -92,7 +86,7 @@ export default class Signup extends PureComponent {
                 />
     }
 
-    createPayload(){
+    createPayload = () => {
         return {
             username: this.state.username,
             password: this.state.password,
@@ -102,7 +96,7 @@ export default class Signup extends PureComponent {
         }
     }
 
-    createAccount(data){
+    createAccount = (data) => {
         fetch('/user/create', {
             body: JSON.stringify(data),
             method: 'POST',

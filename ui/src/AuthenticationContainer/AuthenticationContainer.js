@@ -10,32 +10,28 @@ export default class AuthenticationContainer extends PureComponent {
             isLoggedIn: false,
             newUser: false
         }
-        this.signUpClicked = this.signUpClicked.bind(this)
-        this.cancelClicked = this.cancelClicked.bind(this)
-        this.loginSuccess = this.loginSuccess.bind(this)
-        this.createAccountSuccess = this.createAccountSuccess.bind(this)
     }
 
-    signUpClicked(){
+    signUpClicked = () => {
         this.setState({newUser: true})
     }
 
-    cancelClicked(){
+    cancelClicked = () => {
         this.setState({newUser: false})
     }
 
-    loginSuccess(){
+    loginSuccess = () => {
         this.setState({isLoggedIn: true})
     }
 
-    createAccountSuccess(){
+    createAccountSuccess = () => {
         this.setState({
             newUser: false,
             isLoggedIn: true
         })
     }
 
-    renderContent(){
+    renderContent = () => {
         if(this.state.newUser){
             return <Signup cancelClicked={this.cancelClicked} createAccountSuccess={this.createAccountSuccess} />
         } else if(!this.state.isLoggedIn) {
