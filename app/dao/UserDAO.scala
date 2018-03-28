@@ -37,6 +37,10 @@ class UserDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
     loginSuccess.map(result => result.nonEmpty)
   }
 
+  def getUserByName(name: String): Future[Seq[User]] = db.run(Users.filter(user => user.username === name).result)
+
+  def getAllUsers: Future[Seq[User]] = db.run(Users.result)
+
   private class UserTable(tag: Tag) extends Table[User](tag, "USERS"){
     def username = column[String]("username")
     def password = column[String]("password")

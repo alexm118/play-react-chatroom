@@ -41,4 +41,13 @@ class UserController @Inject()(cc: ControllerComponents,
       case JsError(e) => Future.successful(BadRequest(JsError.toJson(e)))
     }
   }
+
+  def getUserByName(name: String) = Action.async(parse.empty) { implicit request =>
+    userDao.getUserByName(name).map(user => Ok(Json.toJson(user)))
+  }
+
+  def getAllUsers = Action.async(parse.empty) { implicit request =>
+    userDao.getAllUsers.map(users => Ok(Json.toJson(users)))
+  }
+
 }

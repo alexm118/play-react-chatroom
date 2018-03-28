@@ -34,6 +34,22 @@ POST    /user/create                controllers.UserController.createUser
 ###
 POST    /user/login                controllers.UserController.login
 
+###
+#  summary: Retrieves a users information by name
+#  responses:
+#    200:
+#      description: success
+###
+GET     /user/:name                 controllers.UserController.getUserByName(name: String)
+
+###
+#  summary: Retrieves a users information by name
+#  responses:
+#    200:
+#      description: success
+###
+GET     /users/all                  controllers.UserController.getAllUsers
+
 ### NoDocs ###
 GET     /swagger                    controllers.Default.redirect(to = "/docs/swagger-ui/index.html?url=/assets/swagger.json")
 
