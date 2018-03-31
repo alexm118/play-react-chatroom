@@ -32,7 +32,7 @@ export default class Chatlog extends Component {
         if(process.env.NODE_ENV === "development"){
             websocketUrl = "ws://localhost:9000/message"
         } else {
-            websocketUrl = "ws://play-react-chatroom.herokuapp.com/message"
+            websocketUrl = "wss://play-react-chatroom.herokuapp.com/message"
         }
         this.websocket = new WebSocket(websocketUrl)
         this.websocket.onopen = () => {
