@@ -12,7 +12,7 @@ const messageStyle = {
 }
 
 const scrollContainer = {
-    height: '80vh',
+    maxHeight: '80vh',
     overflow: 'scroll'
 }
 
