@@ -72,7 +72,7 @@ export default class Login extends PureComponent {
             }
         }).then(response => {
             if(response.status === 200){
-                this.props.loginSuccess()
+                this.props.loginSuccess(data.username)
             }
         }).catch()
     }

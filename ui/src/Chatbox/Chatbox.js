@@ -22,7 +22,7 @@ export default class Chatbox extends PureComponent {
     }
 
     sendMessage = () => {
-        this.props.websocket.send(this.state.message)
+        this.props.websocket.send(JSON.stringify({username: this.props.username, message: this.state.message}))
         this.setState({message: ""});
     }
 
@@ -60,5 +60,6 @@ export default class Chatbox extends PureComponent {
 }
 
 Chatbox.propTypes = {
-    websocket: PropTypes.object.isRequired
+    websocket: PropTypes.object.isRequired,
+    username: PropTypes.string.isRequired
 }

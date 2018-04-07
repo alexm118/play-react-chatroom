@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Chatlog from '../Chatlog/Chatlog';
 import Chatbox from '../Chatbox/Chatbox';
 
@@ -7,9 +8,7 @@ export default class ChatContainer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            messages: [
-                { username: "admin", message: "this is a test message" }
-            ],
+            messages: [],
             websocket: this.createWebsocket()
         }
         // this.websocket = this.createWebsocket();
@@ -37,7 +36,7 @@ export default class ChatContainer extends Component {
 
     receiveMessage = (message) => {
         let messages = this.state.messages
-        messages.push({username: "admin", message: message.data})
+        messages.push(JSON.parse(message.data))
         this.setState({messages: messages})
         console.log(this.state.messages)
     }
@@ -46,8 +45,12 @@ export default class ChatContainer extends Component {
        return ( 
        <div>
             <Chatlog messages={this.state.messages} />
-            <Chatbox websocket={this.state.websocket} />
+            <Chatbox websocket={this.state.websocket} username={this.props.username} />
         </div>
        )
     }
+}
+
+ChatContainer.propTypes = {
+    username: PropTypes.string.isRequired
 }

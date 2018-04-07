@@ -31,6 +31,7 @@ export default class Chatlog extends Component {
             <div>
                 <div style={scrollContainer} >
                     <Paper style={messageStyle}>
+                        <p>Welcome to the chatroom!</p>
                         {this.props.messages.map(this.renderMessage)}
                     </Paper>
                 </div>
