@@ -52,7 +52,6 @@ export default class Chatbox extends PureComponent {
                     primary={true}
                     disabled={this.disableButton()}
                     onClick={() => this.sendMessage()} 
-                    onKeyDown={this.handleKeyInput}
                     style={sendButtonStyle}
                 />
             </div>

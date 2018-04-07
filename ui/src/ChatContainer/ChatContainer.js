@@ -9,9 +9,10 @@ export default class ChatContainer extends Component {
         this.state = {
             messages: [
                 { username: "admin", message: "this is a test message" }
-            ]
+            ],
+            websocket: this.createWebsocket()
         }
-        this.websocket = this.createWebsocket();
+        // this.websocket = this.createWebsocket();
     }
 
     createWebsocket = () => {
@@ -21,14 +22,17 @@ export default class ChatContainer extends Component {
         } else {
             websocketUrl = "wss://play-react-chatroom.herokuapp.com/message"
         }
-        this.websocket = new WebSocket(websocketUrl)
-        this.websocket.onopen = () => {
+        let websocket = new WebSocket(websocketUrl)
+        websocket.onopen = () => {
             console.log("Connected to Websocket")
         }
-        this.websocket.onerror = () => console.log("Error with Websocket")
-        this.websocket.onmessage = (message) => this.receiveMessage(message)
-        this.websocket.onclose = () => console.log("Closed connection to Websocket")
-        return this.websocket;
+        websocket.onerror = () => console.log("Error with Websocket")
+        websocket.onmessage = (message) => this.receiveMessage(message)
+        websocket.onclose = () => {
+            console.log("Closed connection to Websocket")
+            this.setState({websocket: this.createWebsocket()});
+        }
+        return websocket;
     }
 
     receiveMessage = (message) => {
@@ -42,7 +46,7 @@ export default class ChatContainer extends Component {
        return ( 
        <div>
             <Chatlog messages={this.state.messages} />
-            <Chatbox websocket={this.websocket} />
+            <Chatbox websocket={this.state.websocket} />
         </div>
        )
     }
