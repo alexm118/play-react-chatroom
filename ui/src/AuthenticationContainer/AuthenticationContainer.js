@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
-import Chatlog from '../Chatlog/Chatlog'
+import ChatContainer from '../ChatContainer/ChatContainer';
 
 export default class AuthenticationContainer extends PureComponent {
 
@@ -38,7 +38,7 @@ export default class AuthenticationContainer extends PureComponent {
         } else if(!this.state.isLoggedIn) {
             return <Login signUpClicked={this.signUpClicked} loginSuccess={this.loginSuccess} />
         } else {
-            return <Chatlog />
+            return <ChatContainer />
         }
     }
 
