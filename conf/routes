@@ -54,6 +54,9 @@ GET     /users/all                  controllers.UserController.getAllUsers
 GET /message                        controllers.MessageController.message
 
 ### NoDocs ###
+GET /room/:name                     controllers.MessageController.room(name: String)
+
+### NoDocs ###
 GET     /swagger                    controllers.Default.redirect(to = "/docs/swagger-ui/index.html?url=/assets/swagger.json")
 
 ### NoDocs ###
