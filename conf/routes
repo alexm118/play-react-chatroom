@@ -50,6 +50,53 @@ GET     /user/:name                 controllers.UserController.getUserByName(nam
 ###
 GET     /users/all                  controllers.UserController.getAllUsers
 
+###
+#  summary: Creates a new room
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.Room'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.Room'
+###
+POST    /room/create                controllers.RoomController.createRoom
+
+###
+#  summary: Joins a user to a room
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.JoinRoomRequest'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.Room'
+###
+POST    /rooms/join                controllers.RoomController.joinRoom
+
+###
+#  summary: Retrieves a room by name
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.Room'
+###
+GET     /rooms/:name                 controllers.RoomController.getRoom(name: String)
+
+###
+#  summary: Retrieves all rooms
+#  responses:
+#    200:
+#      description: success
+###
+GET     /rooms                      controllers.RoomController.getAllRooms
+
+
 ### NoDocs ###
 GET /message                        controllers.MessageController.message
 

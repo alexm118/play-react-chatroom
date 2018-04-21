@@ -11,7 +11,6 @@ export default class ChatContainer extends Component {
             messages: [],
             websocket: this.createWebsocket()
         }
-        // this.websocket = this.createWebsocket();
     }
 
     createWebsocket = () => {

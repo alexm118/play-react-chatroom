@@ -21,5 +21,9 @@ Currently being built out below is the todo list:
 2. ~~Incorporate UI into repository~~
 3. ~~Create endpoint to authenticate users~~
 4. ~~Add Login / Signup functionality to UI~~
-5. Create Websocket endpoint to distribute messages
-6. Enable UI to communicate through websocket
+5. ~~Create Websocket endpoint to distribute messages~~
+6. ~~Enable UI to communicate through websocket~~
+7. Add Room Support
+8. Configure Room Joining / Messaging in UI
+9. Message Persistence
+10. Private Messaging
