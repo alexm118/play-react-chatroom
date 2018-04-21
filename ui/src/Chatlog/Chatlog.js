@@ -1,22 +1,7 @@
 import React, { Component  } from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-
-const messageStyle = {
-    width: '90%',
-    marginLeft: '5%',
-    marginRight: '5%',
-    marginTop: 25,
-    marginBottom: 25,
-    padding: 5,
-    display: 'inline-block',
-    minHeight: '75vh'
-}
-
-const scrollContainer = {
-    maxHeight: '80vh',
-    overflow: 'scroll'
-}
+import './Chatlog.css'
 
 export default class Chatlog extends Component {
 
@@ -26,15 +11,24 @@ export default class Chatlog extends Component {
             )
     }
 
+    scrollToBottom = () => this.bottomOfChat.scrollIntoView({behavior: 'smooth'});
+
+    componentDidMount(){
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate(){
+        this.scrollToBottom();
+    }
+
     render(){
         return (
             <div>
-                <div style={scrollContainer} >
-                    <Paper style={messageStyle}>
-                        <p>Welcome to the chatroom!</p>
-                        {this.props.messages.map(this.renderMessage)}
-                    </Paper>
-                </div>
+                <Paper className="message-box">
+                    <p>Welcome to the chatroom!</p>
+                    {this.props.messages.map(this.renderMessage)}
+                    <div ref={(el) => {this.bottomOfChat = el;} } />
+                </Paper>
             </div>
         )
     }

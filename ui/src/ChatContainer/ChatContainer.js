@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Chatlog from '../Chatlog/Chatlog';
 import Chatbox from '../Chatbox/Chatbox';
+import RoomList from '../RoomList/RoomList';
+import { Row, Col } from 'react-flexbox-grid';
 
 export default class ChatContainer extends Component {
 
@@ -43,8 +45,19 @@ export default class ChatContainer extends Component {
     render(){
        return ( 
        <div>
-            <Chatlog messages={this.state.messages} />
-            <Chatbox websocket={this.state.websocket} username={this.props.username} />
+           <Row>
+                <Col xs={3}>
+                    <RoomList/>
+                </Col>
+                <Col xs={9}>
+                    <Chatlog messages={this.state.messages} />
+                </Col>
+            </Row>
+            <Row>
+                <Col xsOffset={3} xs={9} >
+                    <Chatbox websocket={this.state.websocket} username={this.props.username} />
+                </Col>
+            </Row>
         </div>
        )
     }

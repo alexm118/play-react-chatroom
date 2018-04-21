@@ -2,15 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
-const chatboxStyle = {
-    width: '80%',
-    marginLeft: '5%'
-};
-
-const sendButtonStyle = {
-    width: '10%'
-}
+import './Chatbox.css';
 
 export default class Chatbox extends PureComponent {
 
@@ -39,12 +31,12 @@ export default class Chatbox extends PureComponent {
         return (
             <div>
                 <TextField multiLine={true}
-                    rows={2}
+                    rows={1}
                     rowsMax={4}
                     onChange={(e) => this.setState({message: e.target.value})}
                     value={this.state.message}
-                    style={chatboxStyle}
                     onKeyDown={this.handleKeyInput}
+                    className="chatbox"
                     id="chat-field"
                 />
                 <RaisedButton 
@@ -52,7 +44,6 @@ export default class Chatbox extends PureComponent {
                     primary={true}
                     disabled={this.disableButton()}
                     onClick={() => this.sendMessage()} 
-                    style={sendButtonStyle}
                 />
             </div>
         )

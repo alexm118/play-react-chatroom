@@ -3,14 +3,7 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 import PropTypes from 'prop-types'
-
-const halfWidthTextFieldStyle = {
-    width: '40%', marginRight: '5%', marginLeft: '5%'
-}
-
-const fullWidthTextFieldStyle = {
-    width: '90%', marginRight: '5%', marginLeft: '5%'
-}
+import './Signup.css'
 
 const centerText = {
     textAlign: "center"
@@ -77,10 +70,10 @@ export default class Signup extends PureComponent {
         ]
     }
 
-    renderTextField = (label, style, type, onChange) => {
+    renderTextField = (label, className, type, onChange) => {
         return <TextField
                     floatingLabelText={label}
-                    style={style}
+                    className={className}
                     type={type}
                     onChange={(e) => onChange(e)}
                 />
@@ -122,11 +115,11 @@ export default class Signup extends PureComponent {
                     actions={this.createActions()}
                     actionsContainerStyle={centerText}
                 >
-                    {this.renderTextField("Username", fullWidthTextFieldStyle, "input", this.updateUsername)}
-                    {this.renderTextField("Password", fullWidthTextFieldStyle, "password", this.updatePassword)}
-                    {this.renderTextField("Email", fullWidthTextFieldStyle, "input", this.updateEmail)}
-                    {this.renderTextField("First Name", halfWidthTextFieldStyle, "input", this.updateFirstName)}
-                    {this.renderTextField("Last Name", halfWidthTextFieldStyle, "input", this.updateLastName)}
+                    {this.renderTextField("Username", "full-width-text-field", "input", this.updateUsername)}
+                    {this.renderTextField("Password", "full-width-text-field", "password", this.updatePassword)}
+                    {this.renderTextField("Email", "full-width-text-field", "input", this.updateEmail)}
+                    {this.renderTextField("First Name", "half-width-text-field", "input", this.updateFirstName)}
+                    {this.renderTextField("Last Name", "half-width-text-field", "input", this.updateLastName)}
                 </Dialog>
             </div>
         )

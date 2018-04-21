@@ -1,0 +1,11 @@
+.half-width-text-field {
+    width: 40% !important;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.full-width-text-field {
+    width: 90% !important;
+    margin-right: 5%;
+    margin-left: 5%;
+}

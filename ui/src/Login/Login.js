@@ -4,10 +4,6 @@ import Dialog from 'material-ui/Dialog'
 import TextField from 'material-ui/TextField'
 import FlatButton from 'material-ui/FlatButton'
 
-const buttonStyle = {
-    margin: '10px'
-}
-
 export default class Login extends PureComponent {
     
     constructor(props){
@@ -30,7 +26,7 @@ export default class Login extends PureComponent {
 
     renderTextField = (label, type, onChange) => {
         return (
-            <div style={{width: '100%'}}>
+            <div className="login-field">
                 <TextField
                     floatingLabelText={label}
                     type={type}
@@ -47,12 +43,12 @@ export default class Login extends PureComponent {
                         primary={true} 
                         onClick={() => this.login(this.createPayload())} 
                         key="login"
-                        style={buttonStyle} />,
+                        className="login-button" />,
             <FlatButton label="Sign Up" 
                         primary={true} 
                         onClick={this.props.signUpClicked} 
                         key="Sign-up"
-                        style={buttonStyle} />
+                        className="login-button" />
         ]
     }
 

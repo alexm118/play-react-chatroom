@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "build": "cd ui && npm install && npm run build && cd .."
+  },
+  "dependencies": {
+    "react-flexbox-grid": "^2.0.0"
   }
 }

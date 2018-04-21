@@ -1,0 +1,8 @@
+.message-box {
+    margin: 25px;
+    padding: 25px;
+    min-height: 75vh;
+    min-width: 90%;
+    max-height: 80vh;
+    overflow: scroll;
+}
