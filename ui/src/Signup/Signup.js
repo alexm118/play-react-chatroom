@@ -98,9 +98,13 @@ export default class Signup extends PureComponent {
             }
         }).then(response => {
             if(response.status === 200){
-                this.props.createAccountSuccess()
+                response.json().then(
+                    user => this.props.createAccountSuccess(user)
+                )
             }
-        }).catch()
+        }).catch(
+            error => console.log("Error logging in")
+        )
     }
 
     render(){

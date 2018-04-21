@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
 import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
@@ -18,7 +19,7 @@ export default class RoomList extends Component {
     }
 
     fetchRooms(){
-        fetch('/rooms', {
+        fetch(`/users/${this.props.user.user_id}/rooms`, {
             method: 'GET', 
             headers: {
                 'content-type': 'application/json',
@@ -48,4 +49,8 @@ export default class RoomList extends Component {
             </Paper>
         );
     }
+}
+
+RoomList.propTypes = {
+    user: PropTypes.object.isRequired
 }

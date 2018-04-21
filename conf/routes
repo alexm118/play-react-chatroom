@@ -29,6 +29,8 @@ POST    /user/create                controllers.UserController.createUser
 #  responses:
 #    200:
 #      description: success
+#      schema:
+#        $ref: '#/definitions/models.User'
 #    401:
 #      description: unauthorized request
 ###
@@ -49,6 +51,14 @@ GET     /user/:name                 controllers.UserController.getUserByName(nam
 #      description: success
 ###
 GET     /users/all                  controllers.UserController.getAllUsers
+
+###
+#  summary: Retrieves all of a users rooms they are in
+#  responses:
+#    200:
+#      description: success
+###
+GET     /users/:user_id/rooms                  controllers.UserController.getRoomsByUser(user_id: Int)
 
 ###
 #  summary: Creates a new room

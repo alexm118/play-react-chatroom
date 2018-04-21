@@ -23,7 +23,7 @@ Currently being built out below is the todo list:
 4. ~~Add Login / Signup functionality to UI~~
 5. ~~Create Websocket endpoint to distribute messages~~
 6. ~~Enable UI to communicate through websocket~~
-7. Swap inline styles for CSS
+7. ~~Swap inline styles for CSS~~
 8. Add Room Support
 9. Configure Room Joining / Messaging in UI
 10. Message Persistence

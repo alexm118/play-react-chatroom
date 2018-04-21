@@ -47,7 +47,7 @@ export default class ChatContainer extends Component {
        <div>
            <Row>
                 <Col xs={3}>
-                    <RoomList/>
+                    <RoomList user={this.props.user} />
                 </Col>
                 <Col xs={9}>
                     <Chatlog messages={this.state.messages} />
@@ -55,7 +55,7 @@ export default class ChatContainer extends Component {
             </Row>
             <Row>
                 <Col xsOffset={3} xs={9} >
-                    <Chatbox websocket={this.state.websocket} username={this.props.username} />
+                    <Chatbox websocket={this.state.websocket} username={this.props.user.username} />
                 </Col>
             </Row>
         </div>
@@ -64,5 +64,5 @@ export default class ChatContainer extends Component {
 }
 
 ChatContainer.propTypes = {
-    username: PropTypes.string.isRequired
+    user: PropTypes.object.isRequired
 }

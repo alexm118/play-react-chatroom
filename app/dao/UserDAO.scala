@@ -30,11 +30,14 @@ class UserDAO @Inject() (protected val dbConfigProvider: DatabaseConfigProvider)
     }
   }
 
-  def login(loginRequest: LoginRequest): Future[Boolean] = {
+  def login(loginRequest: LoginRequest): Future[Either[String, User]] = {
     val loginSuccess: Future[Seq[User]] = db.run(Users.filter(user => {
       user.username === loginRequest.username && user.password === loginRequest.password
     }).result)
-    loginSuccess.map(result => result.nonEmpty)
+    loginSuccess.collect{
+      case loginResult if loginResult.nonEmpty => Right(loginResult.head)
+      case _ => Left("Unauthorized Request")
+    }
   }
 
   def getUserByName(name: String): Future[Seq[User]] = db.run(Users.filter(user => user.username === name).result)

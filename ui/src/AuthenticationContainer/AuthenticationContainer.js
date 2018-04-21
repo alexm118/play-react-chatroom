@@ -10,7 +10,7 @@ export default class AuthenticationContainer extends PureComponent {
         this.state = {
             isLoggedIn: false,
             newUser: false,
-            username: null
+            user: {}
         }
     }
 
@@ -22,14 +22,15 @@ export default class AuthenticationContainer extends PureComponent {
         this.setState({newUser: false})
     }
 
-    loginSuccess = (username) => {
-        this.setState({isLoggedIn: true, username: username})
+    loginSuccess = (user) => {
+        this.setState({isLoggedIn: true, user: user})
     }
 
-    createAccountSuccess = () => {
+    createAccountSuccess = (user) => {
         this.setState({
             newUser: false,
-            isLoggedIn: true
+            isLoggedIn: true,
+            user: user
         })
     }
 
@@ -39,7 +40,7 @@ export default class AuthenticationContainer extends PureComponent {
         } else if(!this.state.isLoggedIn) {
             return <Login signUpClicked={this.signUpClicked} loginSuccess={this.loginSuccess} />
         } else {
-            return <ChatContainer username={this.state.username} />
+            return <ChatContainer user={this.state.user} />
         }
     }
 

@@ -51,6 +51,13 @@ class RoomDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
     }
   }
 
+  def getAllRoomsForUser(user_id: Int): Future[Seq[Room]] = {
+    val rooms = for {
+      (roomusers, rooms) <- RoomUsers.filter(roomuser => roomuser.user_id === user_id) joinLeft Rooms on (_.room_id === _.room_id)
+    } yield rooms
+    db.run(rooms.result).map(rooms => rooms.flatten)
+  }
+
   private class RoomTable(tag: Tag) extends Table[Room](tag, "ROOM"){
     def room_id = column[Int]("room_id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
