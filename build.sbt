@@ -16,8 +16,4 @@ libraryDependencies += "org.postgresql" % "postgresql" % "9.4-1201-jdbc41"
 
 swaggerDomainNameSpaces := Seq("models")
 
-// Adds additional packages into Twirl
-//TwirlKeys.templateImports += "com.alexmartin.controllers._"
-
-// Adds additional packages into conf/routes
-// play.sbt.routes.RoutesKeys.routesImport += "com.alexmartin.binders._"
+javaOptions in Test += "-Dconfig.file=conf/application.test.conf"

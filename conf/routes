@@ -6,112 +6,11 @@
 ### NoDocs ###
 GET     /                           controllers.FrontendController.index()
 
-###
-#  summary: Creates a new user
-#  parameters:
-#    - name: body
-#      schema:
-#        $ref: '#/definitions/models.User'
-#  responses:
-#    200:
-#      description: success
-#      schema:
-#        $ref: '#/definitions/models.User'
-###
-POST    /user/create                controllers.UserController.createUser
-
-###
-#  summary: Creates a new user
-#  parameters:
-#    - name: body
-#      schema:
-#        $ref: '#/definitions/models.LoginRequest'
-#  responses:
-#    200:
-#      description: success
-#      schema:
-#        $ref: '#/definitions/models.User'
-#    401:
-#      description: unauthorized request
-###
-POST    /user/login                controllers.UserController.login
-
-###
-#  summary: Retrieves a users information by name
-#  responses:
-#    200:
-#      description: success
-###
-GET     /user/:name                 controllers.UserController.getUserByName(name: String)
-
-###
-#  summary: Retrieves a users information by name
-#  responses:
-#    200:
-#      description: success
-###
-GET     /users/all                  controllers.UserController.getAllUsers
-
-###
-#  summary: Retrieves all of a users rooms they are in
-#  responses:
-#    200:
-#      description: success
-###
-GET     /users/:user_id/rooms                  controllers.UserController.getRoomsByUser(user_id: Int)
-
-###
-#  summary: Creates a new room
-#  parameters:
-#    - name: body
-#      schema:
-#        $ref: '#/definitions/models.Room'
-#  responses:
-#    200:
-#      description: success
-#      schema:
-#        $ref: '#/definitions/models.Room'
-###
-POST    /room/create                controllers.RoomController.createRoom
-
-###
-#  summary: Joins a user to a room
-#  parameters:
-#    - name: body
-#      schema:
-#        $ref: '#/definitions/models.JoinRoomRequest'
-#  responses:
-#    200:
-#      description: success
-#      schema:
-#        $ref: '#/definitions/models.Room'
-###
-POST    /rooms/join                controllers.RoomController.joinRoom
-
-###
-#  summary: Retrieves a room by name
-#  responses:
-#    200:
-#      description: success
-#      schema:
-#        $ref: '#/definitions/models.Room'
-###
-GET     /rooms/:name                 controllers.RoomController.getRoom(name: String)
-
-###
-#  summary: Retrieves all rooms
-#  responses:
-#    200:
-#      description: success
-###
-GET     /rooms                      controllers.RoomController.getAllRooms
-
+->      /users                      users.Routes
+->      /rooms                      rooms.Routes
 
 ### NoDocs ###
 GET /message                        controllers.MessageController.message
-
-### NoDocs ###
-GET /room/:name                     controllers.MessageController.room(name: String)
 
 ### NoDocs ###
 GET     /swagger                    controllers.Default.redirect(to = "/docs/swagger-ui/index.html?url=/assets/swagger.json")

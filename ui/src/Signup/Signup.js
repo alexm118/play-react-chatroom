@@ -90,7 +90,7 @@ export default class Signup extends PureComponent {
     }
 
     createAccount = (data) => {
-        fetch('/user/create', {
+        fetch('/users', {
             body: JSON.stringify(data),
             method: 'POST',
             headers: {
@@ -103,7 +103,7 @@ export default class Signup extends PureComponent {
                 )
             }
         }).catch(
-            error => console.log("Error logging in")
+            error => console.log("Error creating account")
         )
     }
 

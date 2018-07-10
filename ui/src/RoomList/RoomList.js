@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
+import NewBubble from 'material-ui/svg-icons/av/fiber-new';
 import {List, ListItem} from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import './RoomList.css'

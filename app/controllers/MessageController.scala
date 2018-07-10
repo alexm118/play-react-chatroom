@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-import actors.{ChatActor, Room, RoomActor}
+import actors.{ChatActor, RoomActor}
 import akka.actor.{ActorRef, ActorSystem}
 import akka.stream.Materializer
 import akka.stream.scaladsl.{BroadcastHub, Flow, Keep, MergeHub, Source}
@@ -18,7 +18,7 @@ import scala.util.{Failure, Success}
 
 
 @Singleton
-class MessageController @Inject()(cc: ControllerComponents, room: Room)
+class MessageController @Inject()(cc: ControllerComponents)
                                  (implicit system: ActorSystem,
                                   mat: Materializer, executionContext: ExecutionContext) extends AbstractController(cc) {
 

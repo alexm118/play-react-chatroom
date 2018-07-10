@@ -1,0 +1,61 @@
+###
+#  summary: Retrieves a users information by name
+#  responses:
+#    200:
+#      description: success
+###
+GET     /                  controllers.UserController.getAllUsers
+
+###
+#  summary: Creates a new user
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.User'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.User'
+###
+POST    /                controllers.UserController.createUser
+
+###
+#  summary: Retrieves a users information by name
+#  responses:
+#    200:
+#      description: success
+###
+GET     /:user_id                 controllers.UserController.getUser(user_id: Int)
+
+###
+#  summary: Deletes a user
+#  responses:
+#    200:
+#      description: success
+###
+DELETE  /:user_id                         controllers.UserController.deleteUser(user_id: Int)
+
+###
+#  summary: Retrieves all of a users rooms they are in
+#  responses:
+#    200:
+#      description: success
+###
+GET     /:user_id/rooms                  controllers.UserController.getRoomsByUser(user_id: Int)
+
+###
+#  summary: Creates a new user
+#  parameters:
+#    - name: body
+#      schema:
+#        $ref: '#/definitions/models.LoginRequest'
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.User'
+#    401:
+#      description: unauthorized request
+###
+POST    /login                controllers.UserController.login

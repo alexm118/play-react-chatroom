@@ -60,7 +60,7 @@ export default class Login extends PureComponent {
     }
 
     login = (data) => {
-        fetch('/user/login', {
+        fetch('/users/login', {
             body: JSON.stringify(data),
             method: 'POST',
             headers: {

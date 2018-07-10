@@ -14,7 +14,7 @@ class RoomDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
   import profile.api._
 
   private val Rooms = TableQuery[RoomTable]
-  private val RoomUsers = TableQuery[RoomUsersTable]
+  private val RoomUsers = TableQuery[RoomUserTable]
 
 
   def createRoom(room: Room): Future[Either[String, Room]] = {
@@ -58,13 +58,13 @@ class RoomDAO @Inject()(protected val dbConfigProvider: DatabaseConfigProvider)
     db.run(rooms.result).map(rooms => rooms.flatten)
   }
 
-  private class RoomTable(tag: Tag) extends Table[Room](tag, "ROOM"){
+  private class RoomTable(tag: Tag) extends Table[Room](tag, "room"){
     def room_id = column[Int]("room_id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def * = (room_id.?, name) <> (Room.tupled, Room.unapply)
   }
 
-  private class RoomUsersTable(tag: Tag) extends Table[RoomUser](tag, "ROOMUSERS"){
+  private class RoomUserTable(tag: Tag) extends Table[RoomUser](tag, "room_user"){
     def room_id = column[Int]("room_id")
     def user_id = column[Int]("user_id")
     def * = (room_id, user_id) <> (RoomUser.tupled, RoomUser.unapply)
