@@ -1,58 +1,42 @@
 package controllers
 
 import java.util.concurrent.TimeUnit
+
 import javax.inject.Inject
 import javax.inject.Singleton
-
-import actors.{ChatActor, RoomActor}
-import akka.actor.{ActorRef, ActorSystem}
+import actors.ChatActor
+import akka.actor.ActorSystem
 import akka.stream.Materializer
-import akka.stream.scaladsl.{BroadcastHub, Flow, Keep, MergeHub, Source}
+import play.api.Logger
 import play.api.libs.json.JsValue
 import play.api.libs.streams.ActorFlow
 import play.api.mvc.{AbstractController, ControllerComponents, WebSocket}
 
-import scala.concurrent.{Await, ExecutionContext}
-import scala.concurrent.duration.{Duration, FiniteDuration}
-import scala.util.{Failure, Success}
-
-
+import scala.concurrent.ExecutionContext
+import scala.concurrent.duration.FiniteDuration
 @Singleton
-class MessageController @Inject()(cc: ControllerComponents)
-                                 (implicit system: ActorSystem,
-                                  mat: Materializer, executionContext: ExecutionContext) extends AbstractController(cc) {
+class MessageController @Inject()(cc: ControllerComponents)(
+    implicit system: ActorSystem,
+    mat: Materializer,
+    executionContext: ExecutionContext)
+    extends AbstractController(cc) {
 
-  private val (chatSink, chatSource) = {
-
-    val source = MergeHub.source[JsValue]
-      .recoverWithRetries(-1, { case _: Exception ⇒ Source.empty })
-
-    val sink = BroadcastHub.sink[JsValue]
-    source.toMat(sink)(Keep.both).run()
-  }
-
-  private val chatFlow: Flow[JsValue, JsValue, _] = {
-    Flow[JsValue].via(Flow.fromSinkAndSource(chatSink, chatSource))
-  }
-
-
-  def message: WebSocket = WebSocket.accept[JsValue, JsValue] { _ => chatFlow }
-
-  def room(name: String): WebSocket = WebSocket.accept[JsValue, JsValue] { _ => {
-    var roomActor: ActorRef = null
-    try {
-      roomActor = system.actorOf(RoomActor.props, name)
-    } catch {
-      case _ => val future = system.actorSelection(s"user/$name").resolveOne(FiniteDuration.apply(5, TimeUnit.SECONDS))
-        future.onComplete {
-          case Success(actor) => roomActor = actor
-          case Failure(_) => roomActor = system.actorOf(RoomActor.props, name)
-        }
-        Await.result(future, Duration.Inf)
+  def room(name: String): WebSocket =
+    WebSocket.acceptOrResult[JsValue, JsValue] { _ =>
+      {
+        system
+          .actorSelection(s"user/$name")
+          .resolveOne(FiniteDuration.apply(5, TimeUnit.SECONDS))
+          .map(
+            roomActor =>
+              Right(ActorFlow.actorRef(out => ChatActor.props(out, roomActor)))
+          )
+          .recover {
+            case _: Throwable => {
+              Logger.error(s"Room $name does not exist")
+              Left(BadRequest("Invalid Room Name"))
+            }
+          }
+      }
     }
-
-    ActorFlow.actorRef(out => ChatActor.props(out, roomActor))
-  }
-  }
-
 }

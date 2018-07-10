@@ -18,9 +18,9 @@ export default class ChatContainer extends Component {
     createWebsocket = () => {
         let websocketUrl;
         if(process.env.NODE_ENV === "development"){
-            websocketUrl = "ws://localhost:9000/message"
+            websocketUrl = "ws://localhost:9000/rooms/chat/general"
         } else {
-            websocketUrl = "wss://play-react-chatroom.herokuapp.com/message"
+            websocketUrl = "wss://play-react-chatroom.herokuapp.com/rooms/chat/general"
         }
         let websocket = new WebSocket(websocketUrl)
         websocket.onopen = () => {
