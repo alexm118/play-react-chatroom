@@ -73,7 +73,7 @@ export default class RoomList extends Component {
 
     renderUsersInRoom = (roomName) => {
         const usersInRoom = this.state.usersInRoom[roomName]
-        if(usersInRoom != undefined && usersInRoom != null){
+        if(usersInRoom !== undefined && usersInRoom !== null){
             return usersInRoom.map((username, index) => <ListItem key={index} primaryText={username} leftIcon={<Person/>}/>)
         }
     }
