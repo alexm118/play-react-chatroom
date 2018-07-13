@@ -23,6 +23,17 @@ POST    /join                controllers.RoomController.joinRoom
 GET     /:name                 controllers.RoomController.getRoom(name: String)
 
 ###
+#  summary: Retrieves a room by name
+#  responses:
+#    200:
+#      description: success
+#      schema:
+#        $ref: '#/definitions/models.Room'
+###
+GET    /:name/users           controllers.MessageController.getUsersInRoom(name: String)
+
+
+###
 #  summary: Creates a new room
 #  parameters:
 #    - name: body
@@ -37,7 +48,7 @@ GET     /:name                 controllers.RoomController.getRoom(name: String)
 POST    /create                controllers.RoomController.createRoom
 
 ### NoDocs ###
-GET /chat/:name                     controllers.MessageController.room(name: String)
+GET /chat/:name                     controllers.MessageController.room(name: String, userName: String)
 
 ###
 #  summary: Retrieves all rooms

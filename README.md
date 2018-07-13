@@ -26,7 +26,7 @@ Currently being built out below is the todo list:
 7. ~~Swap inline styles for CSS~~
 8. ~~Add Room Support~~
 9. ~~Configure Room Joining / Messaging in UI~~
-10. Display Users connected to a room
-11. Message Persistence
-12. Private Messaging
-
+10. ~~Display Users connected to a room~~
+11. User Profile
+12. Message Persistence
+13. Private Messaging

@@ -16,16 +16,12 @@ export default class ChatContainer extends Component {
         }
     }
 
-    componentDidMount(){
-        // this.setState({websocket: this.createWebsocket(this.state.selectedRoom)})
-    }
-
     createWebsocket = (room) => {
         let websocketUrl;
         if(process.env.NODE_ENV === "development"){
-            websocketUrl = `ws://localhost:9000/rooms/chat/${room}`
+            websocketUrl = `ws://localhost:9000/rooms/chat/${room}?userName=${this.props.user.username}`
         } else {
-            websocketUrl = `wss://play-react-chatroom.herokuapp.com/rooms/chat/${room}`
+            websocketUrl = `wss://play-react-chatroom.herokuapp.com/rooms/chat/${room}?userName=${this.props.user.username}`
         }
         let websocket = new WebSocket(websocketUrl)
         websocket.onopen = () => {
