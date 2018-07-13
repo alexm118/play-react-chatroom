@@ -24,8 +24,9 @@ Currently being built out below is the todo list:
 5. ~~Create Websocket endpoint to distribute messages~~
 6. ~~Enable UI to communicate through websocket~~
 7. ~~Swap inline styles for CSS~~
-8. Add Room Support
-9. Configure Room Joining / Messaging in UI
-10. Message Persistence
-11. Private Messaging
+8. ~~Add Room Support~~
+9. ~~Configure Room Joining / Messaging in UI~~
+10. Display Users connected to a room
+11. Message Persistence
+12. Private Messaging
 

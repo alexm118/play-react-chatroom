@@ -34,10 +34,18 @@ export default class RoomList extends Component {
         );
     }
 
-    renderRoom(room){
-        return (
-            <ListItem primaryText={room.name} leftIcon={<CommunicationChatBubble />} />
-        );
+    renderRoom = (room) => {
+        if(this.props.selectedRoom === room.name){
+            return (
+                <div style={{backgroundColor: `#DCDCDC`}} key={room.room_id}>
+                    <ListItem primaryText={room.name} leftIcon={<CommunicationChatBubble />} onClick={() => this.props.selectRoom(room.name)} />
+                </div>
+            )
+        } else {
+            return (
+                <ListItem key={room.room_id} primaryText={room.name} leftIcon={<CommunicationChatBubble />} onClick={() => this.props.selectRoom(room.name)} />
+            );
+        }
     }
 
     render(){
@@ -52,5 +60,7 @@ export default class RoomList extends Component {
 }
 
 RoomList.propTypes = {
-    user: PropTypes.object.isRequired
-}
+    user: PropTypes.object.isRequired,
+    selectedRoom: PropTypes.string.isRequired,
+    selectRoom: PropTypes.func.isRequired
+};

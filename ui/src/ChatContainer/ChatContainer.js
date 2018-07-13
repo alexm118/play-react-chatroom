@@ -11,26 +11,33 @@ export default class ChatContainer extends Component {
         super(props)
         this.state = {
             messages: [],
-            websocket: this.createWebsocket()
+            websocket: this.createWebsocket("general"),
+            selectedRoom: "general"
         }
     }
 
-    createWebsocket = () => {
+    componentDidMount(){
+        // this.setState({websocket: this.createWebsocket(this.state.selectedRoom)})
+    }
+
+    createWebsocket = (room) => {
         let websocketUrl;
         if(process.env.NODE_ENV === "development"){
-            websocketUrl = "ws://localhost:9000/rooms/chat/general"
+            websocketUrl = `ws://localhost:9000/rooms/chat/${room}`
         } else {
-            websocketUrl = "wss://play-react-chatroom.herokuapp.com/rooms/chat/general"
+            websocketUrl = `wss://play-react-chatroom.herokuapp.com/rooms/chat/${room}`
         }
         let websocket = new WebSocket(websocketUrl)
         websocket.onopen = () => {
-            console.log("Connected to Websocket")
+            console.log(`Connected to ${room}`)
         }
         websocket.onerror = () => console.log("Error with Websocket")
         websocket.onmessage = (message) => this.receiveMessage(message)
         websocket.onclose = () => {
-            console.log("Closed connection to Websocket")
-            this.setState({websocket: this.createWebsocket()});
+            console.log(`Closed connection to ${room}`)
+            if(this.state.selectedRoom === room){
+                this.setState({websocket: this.createWebsocket(room)})
+            }
         }
         return websocket;
     }
@@ -42,15 +49,23 @@ export default class ChatContainer extends Component {
         console.log(this.state.messages)
     }
 
+    selectRoom = (roomName) => {
+        this.setState({selectedRoom: roomName})
+        this.state.websocket.close();
+        console.log(`selected ${roomName}`)
+        this.setState({messages: []})
+        this.setState({websocket: this.createWebsocket(roomName)})
+    }
+
     render(){
        return ( 
        <div>
            <Row>
                 <Col xs={3}>
-                    <RoomList user={this.props.user} />
+                    <RoomList user={this.props.user} selectedRoom={this.state.selectedRoom} selectRoom={this.selectRoom} />
                 </Col>
                 <Col xs={9}>
-                    <Chatlog messages={this.state.messages} />
+                    <Chatlog messages={this.state.messages} roomName={this.state.selectedRoom} />
                 </Col>
             </Row>
             <Row>

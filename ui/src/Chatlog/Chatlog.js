@@ -25,7 +25,7 @@ export default class Chatlog extends Component {
         return (
             <div>
                 <Paper className="message-box">
-                    <p>Welcome to the chatroom!</p>
+                    <p>Welcome to the {this.props.roomName}!</p>
                     {this.props.messages.map(this.renderMessage)}
                     <div ref={(el) => {this.bottomOfChat = el;} } />
                 </Paper>
@@ -35,5 +35,6 @@ export default class Chatlog extends Component {
 }
 
 Chatlog.propTypes = {
-    messages: PropTypes.array.isRequired
+    messages: PropTypes.array.isRequired,
+    roomName: PropTypes.string.isRequired
 }
